@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/theme/colors.dart';
-import '../providers/cart_provider.dart';
-import 'cart_item_row.dart';
-import '../../../payment/presentation/pages/checkout_page.dart';
+import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/features/cart/providers/cart_provider.dart';
+import 'package:menuverse/features/cart/presentation/widgets/cart_item_row.dart';
+import 'package:menuverse/features/payment/presentation/pages/checkout_page.dart';
 
 class CartSheet extends ConsumerWidget {
   const CartSheet({Key? key}) : super(key: key);

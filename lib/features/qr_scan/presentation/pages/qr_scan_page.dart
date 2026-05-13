@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/theme/colors.dart';
+import 'package:menuverse/core/theme/colors.dart';
 
 class QRScanPage extends ConsumerStatefulWidget {
   const QRScanPage({Key? key}) : super(key: key);
@@ -12,8 +12,6 @@ class QRScanPage extends ConsumerStatefulWidget {
 }
 
 class _QRScanPageState extends ConsumerState<QRScanPage> {
-  bool _isScanning = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

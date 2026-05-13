@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/theme/colors.dart';
-import '../../../../core/widgets/glass_card.dart';
-import '../../domain/models/dish.dart';
-import '../../../cart/providers/cart_provider.dart';
-import '../../presentation/pages/dish_viewer_page.dart';
+import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/core/widgets/glass_card.dart';
+import 'package:menuverse/features/menu/domain/models/dish.dart';
+import 'package:menuverse/features/cart/providers/cart_provider.dart';
+import 'package:menuverse/features/dish_viewer/presentation/pages/dish_viewer_page.dart';
 
 class DishCard extends ConsumerWidget {
   final Dish dish;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/theme/colors.dart';
-import '../domain/models/dish.dart';
-import '../presentation/widgets/dish_card.dart';
-import '../presentation/widgets/category_switcher.dart';
-import '../presentation/widgets/quick_actions.dart';
-import '../../../cart/providers/cart_provider.dart';
-import '../../../cart/presentation/widgets/cart_sheet.dart';
+import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/features/menu/domain/models/dish.dart';
+import 'package:menuverse/features/menu/presentation/widgets/dish_card.dart';
+import 'package:menuverse/features/menu/presentation/widgets/category_switcher.dart';
+import 'package:menuverse/features/menu/presentation/widgets/quick_actions.dart';
+import 'package:menuverse/features/cart/providers/cart_provider.dart';
+import 'package:menuverse/features/cart/presentation/widgets/cart_sheet.dart';
 
 final selectedCategoryProvider = StateProvider<String>((ref) => 'all');
 
