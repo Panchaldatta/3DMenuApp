@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/theme/colors.dart';
+import 'package:menuverse/core/theme/colors.dart';
 
 class OrderTrackingPage extends StatelessWidget {
   const OrderTrackingPage({Key? key}) : super(key: key);

@@ -1,25 +1,59 @@
-// lib/features/menu/domain/models/dish.dart
+class Dish {
+  final String id;
+  final String name;
+  final String description;
+  final double price;
+  final String imageUrl;
+  final String modelUrl;
+  final int calories;
+  final int spiceLevel; // 0-5
+  final bool isVeg;
+  final double rating;
+  final bool isChefRecommendation;
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+  const Dish({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.imageUrl,
+    required this.modelUrl,
+    required this.calories,
+    required this.spiceLevel,
+    required this.isVeg,
+    required this.rating,
+    this.isChefRecommendation = false,
+  });
 
-part 'dish.freezed.dart';
-part 'dish.g.dart';
+  factory Dish.fromJson(Map<String, dynamic> json) {
+    return Dish(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      price: json['price'].toDouble(),
+      imageUrl: json['imageUrl'],
+      modelUrl: json['modelUrl'],
+      calories: json['calories'],
+      spiceLevel: json['spiceLevel'],
+      isVeg: json['isVeg'],
+      rating: json['rating'].toDouble(),
+      isChefRecommendation: json['isChefRecommendation'] ?? false,
+    );
+  }
 
-@freezed
-class Dish with _$Dish {
-  const factory Dish({
-    required String id,
-    required String name,
-    required String description,
-    required double price,
-    required String imageUrl,
-    required String modelUrl,
-    required int calories,
-    required int spiceLevel, // 0-5
-    required bool isVeg,
-    required double rating,
-    @Default(false) bool isChefRecommendation,
-  }) = _Dish;
-
-  factory Dish.fromJson(Map<String, dynamic> json) => _$DishFromJson(json);
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+      'modelUrl': modelUrl,
+      'calories': calories,
+      'spiceLevel': spiceLevel,
+      'isVeg': isVeg,
+      'rating': rating,
+      'isChefRecommendation': isChefRecommendation,
+    };
+  }
 }

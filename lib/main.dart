@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'features/splash/presentation/pages/splash_page.dart';
-import 'features/qr_scan/presentation/pages/qr_scan_page.dart';
-import 'features/menu/presentation/pages/menu_page.dart';
-import 'features/admin/presentation/pages/admin_dashboard_page.dart';
-import 'features/profile/presentation/pages/profile_page.dart';
-import 'features/order_tracking/presentation/pages/order_tracking_page.dart';
-import 'core/theme/theme.dart';
+import 'package:menuverse/features/splash/presentation/pages/splash_page.dart';
+import 'package:menuverse/features/qr_scan/presentation/pages/qr_scan_page.dart';
+import 'package:menuverse/features/menu/presentation/pages/menu_page.dart';
+import 'package:menuverse/features/admin/presentation/pages/admin_dashboard_page.dart';
+import 'package:menuverse/features/profile/presentation/pages/profile_page.dart';
+import 'package:menuverse/features/order_tracking/presentation/pages/order_tracking_page.dart';
+import 'package:menuverse/core/theme/theme.dart';
 
 void main() {
   runApp(const ProviderScope(child: MenuVerseApp()));

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../core/theme/colors.dart';
-import '../providers/cart_provider.dart';
+import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/features/cart/providers/cart_provider.dart';
 
 class CartItemRow extends ConsumerWidget {
   final CartItem item;

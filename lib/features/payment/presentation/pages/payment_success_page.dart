@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/theme/colors.dart';
-import '../../order_tracking/presentation/pages/order_tracking_page.dart';
+import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/features/order_tracking/presentation/pages/order_tracking_page.dart';
 
 class PaymentSuccessPage extends StatelessWidget {
   const PaymentSuccessPage({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class PaymentSuccessPage extends StatelessWidget {
               
               Text(
                 'Payment Successful!',
-                style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
                 textAlign: TextAlign.center,
               ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
               

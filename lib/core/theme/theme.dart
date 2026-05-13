@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
-import 'typography.dart';
+import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/core/theme/typography.dart';
 
 class AppTheme {
   static final ThemeData darkTheme = ThemeData(
@@ -22,7 +22,7 @@ class AppTheme {
         color: AppColors.onSurface,
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: AppColors.surfaceCard,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/theme/colors.dart';
-import '../../../cart/providers/cart_provider.dart';
-import 'payment_success_page.dart';
+import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/features/cart/providers/cart_provider.dart';
+import 'package:menuverse/features/payment/presentation/pages/payment_success_page.dart';
 
 class CheckoutPage extends ConsumerStatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -101,7 +101,7 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
 
   Widget _buildSummaryRow(String label, String value, {bool isTotal = false}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 40/10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
