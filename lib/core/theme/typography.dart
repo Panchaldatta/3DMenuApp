@@ -43,13 +43,13 @@ final TextTheme appTextTheme = TextTheme(
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: FontWeight.normal,
-    color: AppColors.onSurface.withOpacity(0.8),
+    color: AppColors.onSurfaceLight,
   ),
   labelLarge: TextStyle(
     fontFamily: 'Outfit',
     fontSize: 14,
     fontWeight: FontWeight.w600,
     color: AppColors.onSurface,
-    letterSpacing: 1.1,
+    letterSpacing: 0.5,
   ),
 );
