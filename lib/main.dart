@@ -33,7 +33,7 @@ class MenuVerseApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'MenuVerse',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
       routerConfig: router,
     );
   }
