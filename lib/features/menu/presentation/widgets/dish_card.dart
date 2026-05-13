@@ -6,6 +6,7 @@ import '../../../../core/theme/colors.dart';
 import '../../../../core/widgets/glass_card.dart';
 import '../../domain/models/dish.dart';
 import '../../../cart/providers/cart_provider.dart';
+import '../../presentation/pages/dish_viewer_page.dart';
 
 class DishCard extends ConsumerWidget {
   final Dish dish;
@@ -18,7 +19,12 @@ class DishCard extends ConsumerWidget {
       padding: EdgeInsets.zero,
       child: InkWell(
         onTap: () {
-          // TODO: Navigate to 3D Dish Viewer
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DishViewerPage(dish: dish),
+            ),
+          );
         },
         borderRadius: BorderRadius.circular(20),
         child: Column(

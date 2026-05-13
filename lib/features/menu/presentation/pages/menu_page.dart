@@ -6,6 +6,7 @@ import '../domain/models/dish.dart';
 import '../presentation/widgets/dish_card.dart';
 import '../presentation/widgets/category_switcher.dart';
 import '../../../cart/providers/cart_provider.dart';
+import '../../../cart/presentation/widgets/cart_sheet.dart';
 
 final selectedCategoryProvider = StateProvider<String>((ref) => 'all');
 
@@ -135,6 +136,13 @@ class MenuPage extends ConsumerWidget {
                         ),
                       ],
                     ),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () => showCart(context),
+                          icon: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 28),
+                        ),
                         if (cartItems.isNotEmpty)
                           Positioned(
                             right: 8,
@@ -205,9 +213,3 @@ class MenuPage extends ConsumerWidget {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}

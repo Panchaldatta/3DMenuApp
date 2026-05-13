@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/theme/colors.dart';
 import '../providers/cart_provider.dart';
 import 'cart_item_row.dart';
+import '../../../payment/presentation/pages/checkout_page.dart';
 
 class CartSheet extends ConsumerWidget {
   const CartSheet({Key? key}) : super(key: key);
@@ -101,7 +102,11 @@ class CartSheet extends ConsumerWidget {
             height: 60,
             child: ElevatedButton(
               onPressed: cartItems.isEmpty ? null : () {
-                // TODO: Navigate to Payment
+                Navigator.pop(context); // Close sheet
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CheckoutPage()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.neonBlue,
