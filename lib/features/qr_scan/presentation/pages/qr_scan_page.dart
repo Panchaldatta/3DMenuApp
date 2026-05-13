@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:menuverse/core/theme/colors.dart';
+import 'package:menuverse/features/qr_scan/presentation/widgets/ar_menu_overlay.dart';
 
 class QRScanPage extends ConsumerStatefulWidget {
   const QRScanPage({Key? key}) : super(key: key);
@@ -12,6 +13,8 @@ class QRScanPage extends ConsumerStatefulWidget {
 }
 
 class _QRScanPageState extends ConsumerState<QRScanPage> {
+  bool _showAR = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,9 +78,13 @@ class _QRScanPageState extends ConsumerState<QRScanPage> {
                     
                     const SizedBox(height: 60),
                     
-                    // Mock Success Button (for testing without real QR)
+                    // Mock Success Button
                     ElevatedButton(
-                      onPressed: () => context.go('/menu'),
+                      onPressed: () {
+                        setState(() {
+                          _showAR = true;
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.neonBlue.withOpacity(0.1),
                         foregroundColor: AppColors.neonBlue,
@@ -85,7 +92,7 @@ class _QRScanPageState extends ConsumerState<QRScanPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       ),
-                      child: const Text('MOCK SCAN SUCCESS', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text('DETECT AR TARGET', style: TextStyle(fontWeight: FontWeight.bold)),
                     ).animate().fadeIn(delay: 1.seconds),
                   ],
                 ),
@@ -134,6 +141,12 @@ class _QRScanPageState extends ConsumerState<QRScanPage> {
               icon: const Icon(Icons.close, color: Colors.white),
             ),
           ),
+
+          // AR Overlay
+          if (_showAR)
+            ARMenuOverlay(
+              onDismiss: () => context.go('/menu'),
+            ),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:menuverse/core/theme/colors.dart';
 import 'package:menuverse/features/menu/domain/models/dish.dart';
 import 'package:menuverse/features/cart/providers/cart_provider.dart';
@@ -16,8 +16,6 @@ class DishViewerPage extends ConsumerStatefulWidget {
 }
 
 class _DishViewerPageState extends ConsumerState<DishViewerPage> {
-  double _rotation = 0.0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,70 +50,22 @@ class _DishViewerPageState extends ConsumerState<DishViewerPage> {
                   ),
                 ),
                 
-                // 3D Visualizer Placeholder
+                // Real 3D Visualizer
                 Expanded(
-                  child: GestureDetector(
-                    onHorizontalDragUpdate: (details) {
-                      setState(() {
-                        _rotation += details.delta.dx * 0.01;
-                      });
-                    },
-                    child: Center(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          // Shadow/Reflection
-                          Transform(
-                            transform: Matrix4.identity()
-                              ..setEntry(3, 2, 0.001)
-                              ..rotateX(1.2)
-                              ..translate(0.0, 100.0, 0.0),
-                            alignment: FractionalOffset.center,
-                            child: Container(
-                              width: 200,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.neonBlue.withOpacity(0.2),
-                                    blurRadius: 40,
-                                    spreadRadius: 10,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          
-                          // Rotating Image Placeholder (3D Mimic)
-                          Transform(
-                            transform: Matrix4.identity()
-                              ..setEntry(3, 2, 0.001)
-                              ..rotateY(_rotation),
-                            alignment: FractionalOffset.center,
-                            child: Hero(
-                              tag: 'dish_${widget.dish.id}',
-                              child: Container(
-                                width: 280,
-                                height: 280,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: CachedNetworkImageProvider(widget.dish.imageUrl),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.neonCyan.withOpacity(0.3),
-                                      blurRadius: 20,
-                                      spreadRadius: 2,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                  child: Center(
+                    child: Hero(
+                      tag: 'dish_${widget.dish.id}',
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 400,
+                        child: ModelViewer(
+                          src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // Should be widget.dish.modelUrl in real app
+                          alt: widget.dish.name,
+                          ar: true,
+                          autoRotate: true,
+                          cameraControls: true,
+                          backgroundColor: Colors.transparent,
+                        ),
                       ),
                     ),
                   ),
@@ -136,7 +86,7 @@ class _DishViewerPageState extends ConsumerState<DishViewerPage> {
                         children: [
                           Text(
                             widget.dish.name,
-                            style: Theme.of(context).textTheme.displaySmall,
+                            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontSize: 28),
                           ),
                           Text(
                             '\$${widget.dish.price.toStringAsFixed(2)}',
@@ -179,6 +129,13 @@ class _DishViewerPageState extends ConsumerState<DishViewerPage> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   ref.read(cartProvider.notifier).addToCart(widget.dish);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('${widget.dish.name} added to cart!'),
+                                      backgroundColor: AppColors.neonBlue,
+                                      behavior: SnackBarBehavior.floating,
+                                    ),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.neonBlue,
