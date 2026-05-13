@@ -1,6 +1,6 @@
-// lib/core/widgets/glass_card.dart
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import 'dart:ui';
+import '../theme/colors.dart';
 
 class GlassCard extends StatelessWidget {
   final Widget child;
@@ -10,7 +10,7 @@ class GlassCard extends StatelessWidget {
   const GlassCard({
     Key? key,
     required this.child,
-    this.borderRadius = 16,
+    this.borderRadius = 20,
     this.padding = const EdgeInsets.all(12),
   }) : super(key: key);
 
@@ -19,18 +19,18 @@ class GlassCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
         child: Container(
           padding: padding,
           decoration: BoxDecoration(
-            color: AppColors.surface.withOpacity(0.4),
+            color: AppColors.surfaceCard.withOpacity(0.4),
             borderRadius: BorderRadius.circular(borderRadius),
-            border: Border.all(color: AppColors.neonBlue.withOpacity(0.3), width: 1),
+            border: Border.all(color: AppColors.neonBlue.withOpacity(0.2), width: 1.5),
             boxShadow: [
               BoxShadow(
-                color: AppColors.neonBlue.withOpacity(0.2),
-                blurRadius: 8,
-                spreadRadius: 1,
+                color: AppColors.neonBlue.withOpacity(0.1),
+                blurRadius: 20,
+                spreadRadius: 2,
               ),
             ],
           ),

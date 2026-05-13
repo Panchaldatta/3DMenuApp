@@ -5,6 +5,7 @@ import '../../../../core/theme/colors.dart';
 import '../domain/models/dish.dart';
 import '../presentation/widgets/dish_card.dart';
 import '../presentation/widgets/category_switcher.dart';
+import '../presentation/widgets/quick_actions.dart';
 import '../../../cart/providers/cart_provider.dart';
 import '../../../cart/presentation/widgets/cart_sheet.dart';
 
@@ -13,7 +14,6 @@ final selectedCategoryProvider = StateProvider<String>((ref) => 'all');
 final menuProvider = FutureProvider<List<Dish>>((ref) async {
   final category = ref.watch(selectedCategoryProvider);
   
-  // Mock data simulation
   await Future.delayed(const Duration(milliseconds: 800));
   
   final allDishes = [
@@ -105,111 +105,124 @@ class MenuPage extends ConsumerWidget {
     ];
 
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          color: AppColors.background,
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Custom AppBar
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'MenuVerse',
-                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: AppColors.onSurface,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Table 07 • Futuristic Dining',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.neonBlue,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () => showCart(context),
-                          icon: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 28),
-                        ),
-                        if (cartItems.isNotEmpty)
-                          Positioned(
-                            right: 8,
-                            top: 8,
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: const BoxDecoration(
-                                color: AppColors.neonPurple,
-                                shape: BoxShape.circle,
-                              ),
-                              constraints: const BoxConstraints(
-                                minWidth: 16,
-                                minHeight: 16,
-                              ),
-                              child: Text(
-                                '${cartItems.length}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
+      backgroundColor: AppColors.background,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                // Custom AppBar
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'MenuVerse',
+                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                              color: AppColors.onSurface,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ).animate().scale().shake(),
-                      ],
-                    ),
-                  ],
+                          ),
+                          Text(
+                            'Table 07 • Futuristic Dining',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.neonBlue,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () => showCart(context),
+                            icon: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 28),
+                          ),
+                          if (cartItems.isNotEmpty)
+                            Positioned(
+                              right: 8,
+                              top: 8,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: AppColors.neonPurple,
+                                  shape: BoxShape.circle,
+                                ),
+                                constraints: const BoxConstraints(
+                                  minWidth: 16,
+                                  minHeight: 16,
+                                ),
+                                child: Text(
+                                  '${cartItems.length}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ).animate().scale().shake(),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              
-              // Category Switcher
-              CategorySwitcher(
-                categories: categories,
-                selectedCategoryId: selectedCategory,
-                onCategorySelected: (id) {
-                  ref.read(selectedCategoryProvider.notifier).state = id;
-                },
-              ).animate().fadeIn(delay: 200.ms).slideX(),
+                
+                // Category Switcher
+                CategorySwitcher(
+                  categories: categories,
+                  selectedCategoryId: selectedCategory,
+                  onCategorySelected: (id) {
+                    ref.read(selectedCategoryProvider.notifier).state = id;
+                  },
+                ).animate().fadeIn(delay: 200.ms).slideX(),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              // Menu Grid
-              Expanded(
-                child: asyncDishes.when(
-                  data: (dishes) => GridView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.72,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
+                // Menu Grid
+                Expanded(
+                  child: asyncDishes.when(
+                    data: (dishes) => GridView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.72,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                      ),
+                      itemCount: dishes.length,
+                      itemBuilder: (context, index) {
+                        return DishCard(dish: dishes[index])
+                          .animate(delay: (index * 100).ms)
+                          .fadeIn()
+                          .scale();
+                      },
                     ),
-                    itemCount: dishes.length,
-                    itemBuilder: (context, index) {
-                      return DishCard(dish: dishes[index])
-                        .animate(delay: (index * 100).ms)
-                        .fadeIn()
-                        .scale();
-                    },
-                  ),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(color: AppColors.neonBlue),
-                  ),
-                  error: (err, stack) => Center(
-                    child: Text('Error: $err', style: const TextStyle(color: Colors.white)),
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(color: AppColors.neonBlue),
+                    ),
+                    error: (err, stack) => Center(
+                      child: Text('Error: $err', style: const TextStyle(color: Colors.white)),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
+          ),
+          
+          // Floating Quick Actions
+          const Positioned(
+            bottom: 30,
+            right: 20,
+            child: QuickActions(),
+          ).animate().fadeIn(delay: 1.seconds).slideY(begin: 0.2),
+        ],
+      ),
+    );
+  }
+}
